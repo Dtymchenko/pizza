@@ -1,0 +1,29 @@
+.categories_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.categories_list {
+    display: flex;
+    & li {
+        margin-right: 10px;
+        border: 1px grey solid;
+        border-radius: 15px;
+        background-color: rgb(224, 220, 220);
+        padding: 5px 15px;
+        cursor: pointer;
+    }
+}
+.active {
+    background-color: black !important;
+    color: white;
+}
+
+.categories_sort {
+    margin-right: 50px;
+    & span {
+        text-decoration: underline;
+        color: burlywood;
+    }
+}

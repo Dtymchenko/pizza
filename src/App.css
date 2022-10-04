@@ -1,0 +1,12 @@
+.App {
+  width: 1200px;
+  text-align: center;
+  margin: 30px auto;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+.wrapper {
+  background-color: aliceblue;
+  padding: 30px;
+}

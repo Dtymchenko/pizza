@@ -1,0 +1,51 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header_logo_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.header_input_block {
+    position: relative;
+    & img {
+        position: relative;
+        top: 8px;
+        right: 30px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+.header_input {
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+.header_cart_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    background-color: rgba(63, 30, 210, 0.904);
+    margin-right: 30px;
+    color: white;
+}
+
+.header_cart_divider {
+    width: 4px;
+    height: 12px;
+    background-color: rgb(175, 47, 47);
+    margin: 0 3px;
+}

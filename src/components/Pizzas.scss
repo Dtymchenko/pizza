@@ -1,0 +1,63 @@
+.pizzas_block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.pizza {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pizza_title {
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.pizza_options {
+    width: 100%;
+    border: 1px solid rgb(184, 182, 182);
+    border-radius: 10px;
+    background-color: rgb(216, 204, 204);
+    margin: 20px;
+    padding: 5px;
+    &.active {
+        background: #ffffff;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+        border-radius: 5px;
+        cursor: auto;
+    }
+}
+
+.pizza_options_types {
+    display: flex;
+    & div {
+        flex: 1;
+        border: 1px solid rgb(184, 182, 182);
+        border-radius: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        &:nth-last-child(1) {
+            margin-right: 0;
+        }
+    }    
+}
+
+.pizza_options_sizes {
+    display: flex;
+    & div {
+        flex: 1;
+        border: 1px solid rgb(184, 182, 182);
+        border-radius: 5px;
+        margin-right: 5px;
+        cursor: pointer;
+        &:nth-last-child(1) {
+            margin-right: 0;
+        }
+    }
+}
