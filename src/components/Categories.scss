@@ -22,8 +22,30 @@
 
 .categories_sort {
     margin-right: 50px;
+    position: relative;
     & span {
         text-decoration: underline;
         color: burlywood;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    & li {
+        text-decoration: underline;
+        color: burlywood;
+        &:hover {
+            cursor: pointer;
+            color: blue;
+        }
+    }
+}
+.popup {
+    position: absolute;
+    right: 0;
+    background-color: rgb(88, 83, 83);
+    & ul {
+        text-align: center;
+        margin: 10px 0 ;
+        padding: 0;
     }
 }

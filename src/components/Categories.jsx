@@ -1,17 +1,22 @@
 import React from 'react'
 import './Categories.scss';
 
+export default function Categories({ categories }) {
 
-
-export default function Categories({ items }) {
-
-    const [isActive, setIsActive] = React.useState(1)
+    const sortList = ['price', 'rate', 'name']
+    const [isActive, setIsActive] = React.useState(0)
+    const [isOpen, setIsOpen] = React.useState(false)
+    const [selected, setSelected] = React.useState(0)
+    const onClickListItem = (i) => {
+        setSelected(i);
+        setIsOpen(false)
+    }
     
     return (
         <div className='categories_wrapper'>
             
                 <ul className='categories_list'>
-                    {items.map((item) => {
+                    {categories.map((item) => {
                         return <li
                         onClick={() => setIsActive(item.id)}
                         key={item.id}
@@ -20,7 +25,19 @@ export default function Categories({ items }) {
                 </ul>
             
             <div className='categories_sort'>
-                Sort by <span>popular</span>
+                Sort by <span onClick={() => setIsOpen(!isOpen)}>{sortList[selected]}</span>
+                <div className='popup'>
+                {
+                    isOpen && <ul>
+                        {sortList.map((item, i) => 
+                            <li 
+                            key={i}
+                            onClick={() => onClickListItem(i)}>{item}</li>
+                        )}
+                </ul>
+                }
+                </div>
+                
             </div>
         </div>
     )

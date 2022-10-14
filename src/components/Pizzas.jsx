@@ -1,9 +1,9 @@
 import React from 'react'
 import './Pizzas.scss';
-import pizzas from '../assets/pizzas.json'
 
 
-export default function Pizzas() {
+
+export default function Pizzas({ items}) {
     
     const typeNames = ['thin', 'traditional']
     const [typeSelected, setTypeSelected] = React.useState(0)
@@ -11,7 +11,7 @@ export default function Pizzas() {
 
     return (
         <div className='pizzas_block'>
-            {pizzas.map((item) => {
+            {items.map((item) => {
                 return <div key={item.id} className='pizza'>
                     <img className='pizza_img' src={item.imageUrl} width={250}></img>
                     <div className='pizza_title'>{item.title}</div>
@@ -35,10 +35,11 @@ export default function Pizzas() {
                         </div>
                     </div>
                     <div className='pizza_price'>
-                        <span className='pizza_price_value'>from {item.price} $</span>
-                        <span className='pizza_price_button'>+ Add 0</span>
+                        <div className='pizza_price_value'>from {item.price} $</div>
+                        <div className='pizza_price_button'>+ Add 0</div>
                     </div>
                 </div>
+                
             })}
         </div>
     )
