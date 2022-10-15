@@ -1,17 +1,16 @@
 import React from 'react'
 import './Categories.scss';
 
-export default function Categories({ categories }) {
+export default function Categories({ categories, isActive, setIsActive }) {
 
-    const sortList = ['price', 'rate', 'name']
-    const [isActive, setIsActive] = React.useState(0)
+    const sortList = ['price ASC', 'price DESC', 'rate ASC', 'rate DESC', 'name ASC', 'name DESC']
     const [isOpen, setIsOpen] = React.useState(false)
     const [selected, setSelected] = React.useState(0)
     const onClickListItem = (i) => {
         setSelected(i);
         setIsOpen(false)
     }
-    
+
     return (
         <div className='categories_wrapper'>
             

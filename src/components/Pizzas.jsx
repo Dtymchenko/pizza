@@ -1,24 +1,27 @@
 import React from 'react'
 import './Pizzas.scss';
+import Categories from './Categories';
 
 
 
-export default function Pizzas({ items}) {
+export default function Pizzas({ items, isActive, categories }) {
     
     const typeNames = ['thin', 'traditional']
     const [typeSelected, setTypeSelected] = React.useState(0)
     const [sizeSelected, setSizeSelected] = React.useState(0)
 
     return (
-        <div className='pizzas_block'>
-            {items.map((item) => {
-                return <div key={item.id} className='pizza'>
-                    <img className='pizza_img' src={item.imageUrl} width={250}></img>
-                    <div className='pizza_title'>{item.title}</div>
-                    <div className='pizza_options'>
-                        <div className='pizza_options_types'>
-                            {item.types.map((type, index) => {
-                                return <div
+        <>
+            <h1> {categories[isActive].title} Pizzas</h1>
+            <div className='pizzas_block'>
+                {items.map((item) => {
+                    return <div key={item.id} className='pizza'>
+                        <img className='pizza_img' src={item.imageUrl} width={250}></img>
+                        <div className='pizza_title'>{item.title}</div>
+                        <div className='pizza_options'>
+                            <div className='pizza_options_types'>
+                                {item.types.map((type, index) => {
+                                    return <div
                                         className={typeSelected === index ? "active" : ""}
                                         onClick={() => setTypeSelected(index)}
                                         key={index}>{typeNames[type]}
@@ -42,5 +45,7 @@ export default function Pizzas({ items}) {
                 
             })}
         </div>
+    </>
+        
     )
 }

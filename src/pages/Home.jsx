@@ -3,8 +3,9 @@ import Categories from '../components/Categories';
 import Pizzas from '../components/Pizzas'
 import Skeleton from '../components/Skeleton';
 
-const NotFound = () => {
+const Home = () => {
 
+const [isActive, setIsActive] = React.useState(1)
 const [items, setItems] = React.useState([])
 const [isLoading, setIsLoading] = React.useState(true)
 const fakeArr = [...new Array(8)]
@@ -34,20 +35,23 @@ const categories = [{
 }]
 
 React.useEffect(() => {
-    fetch("https://6319e5bb8e51a64d2befd040.mockapi.io/pizzaItems")
+    setIsLoading(true)
+    fetch(`https://6319e5bb8e51a64d2befd040.mockapi.io/pizzaItems${isActive > 0 ? `?category=${isActive}` : ''}`)
+    // fetch("https://6319e5bb8e51a64d2befd040.mockapi.io/pizzaItems?sortBy=price&order=asc")
+    // fetch("https://6319e5bb8e51a64d2befd040.mockapi.io/pizzaItems")
         .then((res) => res.json())
         .then((arr) => {
         setItems(arr)
         setIsLoading(false)
     })
-}, []);
+}, [isActive]);
     return (
         <>
-            <Categories categories={categories}  />
+            <Categories categories={categories} isActive={isActive} setIsActive={setIsActive}  />
             {isLoading && fakeArr.map((_, i) => <Skeleton key={i} />)}
-            <Pizzas items={items}/>
+            <Pizzas categories={categories} isActive={isActive} items={items}/>
         </>
     );
 }
 
-export default NotFound;
+export default Home;
