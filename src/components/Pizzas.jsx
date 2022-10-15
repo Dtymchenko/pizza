@@ -4,17 +4,20 @@ import Categories from './Categories';
 
 
 
-export default function Pizzas({ items, isActive, categories }) {
+export default function Pizzas({ items, isActive, categories, searchInput }) {
     
     const typeNames = ['thin', 'traditional']
     const [typeSelected, setTypeSelected] = React.useState(0)
     const [sizeSelected, setSizeSelected] = React.useState(0)
 
+
     return (
         <>
             <h1> {categories[isActive].title} Pizzas</h1>
             <div className='pizzas_block'>
-                {items.map((item) => {
+                {items
+                .filter(obj => obj && obj.title.toUpperCase().includes(searchInput.toUpperCase()))
+                .map((item) => {
                     return <div key={item.id} className='pizza'>
                         <img className='pizza_img' src={item.imageUrl} width={250}></img>
                         <div className='pizza_title'>{item.title}</div>
@@ -43,7 +46,9 @@ export default function Pizzas({ items, isActive, categories }) {
                     </div>
                 </div>
                 
-            })}
+            }
+            
+            )}
         </div>
     </>
         

@@ -3,7 +3,7 @@ import Categories from '../components/Categories';
 import Pizzas from '../components/Pizzas'
 import Skeleton from '../components/Skeleton';
 
-const Home = () => {
+const Home = ({ searchInput }) => {
 
 const [isActive, setIsActive] = React.useState(0)
 const [items, setItems] = React.useState([])
@@ -84,7 +84,7 @@ React.useEffect(() => {
         <>
             <Categories sortList={sortList} categories={categories} isActive={isActive} setIsActive={setIsActive} setSortValue={setSortValue}  />
             {isLoading && fakeArr.map((_, i) => <Skeleton key={i} />)}
-            <Pizzas categories={categories} isActive={isActive} items={items}/>
+            <Pizzas searchInput={searchInput} categories={categories} isActive={isActive} items={items}/>
         </>
     );
 }

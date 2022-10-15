@@ -1,11 +1,11 @@
 import React from 'react'
 import './Header.scss';
 import logoSvg from '../assets/img/pizza-logo.svg'
-import searchImg from '../assets/img/search-icon.png'
+import closeImg from '../assets/img/close-icon.png'
 import { Link } from 'react-router-dom';
 
 
-export default function Header() {
+export default function Header({ searchInput, setSearchInput }) {
     return (
     <header>
         <Link to='/'>
@@ -16,8 +16,10 @@ export default function Header() {
         </Link>
         
         <div className='header_input_block'>
-            <input className='header_input' type='text' placeholder='search pizza'></input>
-            <img width={25} src={searchImg}></img>
+            <input value={searchInput} onChange={(e) => setSearchInput(e.target.value)} className='header_input' type='text' placeholder='search pizza'></input>
+            {
+                searchInput && <img width={25} src={closeImg} onClick={() => setSearchInput('')}></img>
+            }
         </div>
         <Link to='/cart'>
         <div className='header_cart_block'>
