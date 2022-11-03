@@ -1,11 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Categories from '../components/Categories';
 import Pizzas from '../components/Pizzas'
 import Skeleton from '../components/Skeleton';
+import { SearchContext } from './../App';
+import { sortList, setFilters } from '../redux/slices/filterSlice';
+import axios from 'axios';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
-const Home = ({ searchInput }) => {
+const Home = () => {
 
-const [isActive, setIsActive] = React.useState(0)
+const navigate = useNavigate()
+const dispatch = useDispatch()
+const { searchInput } = React.useContext(SearchContext)
+
+const isActive = useSelector((state) => state.filterSlice.categoryId)
+const setIsActive = () => {}
 const [items, setItems] = React.useState([])
 const [isLoading, setIsLoading] = React.useState(true)
 const fakeArr = [...new Array(8)]
@@ -33,39 +45,20 @@ const categories = [{
     id: 5,
     title: "Spicy"
 }]
-const sortList = [
-    {
-        id: 0,
-        name: 'price ASC',
-        value: 'price'
-    },
-    {
-        id: 1,
-        name: 'price DESC',
-        value: '-price'
-    },
-    {
-        id: 2,
-        name: 'rate ASC',
-        value: 'rating'
-    },
-    {
-        id: 3,
-        name: 'rate DESC',
-        value: '-rating'
-    },
-    {
-        id: 4,
-        name: 'name ASC',
-        value: 'title'
-    },
-    {
-        id: 5,
-        name: 'name DESC',
-        value: '-title'
+
+const sortValue = useSelector((state) => state.filterSlice.sort.value)
+
+React.useEffect(() => {
+    if (window.location.search) {
+        const params = qs.parse(window.location.search.substring(1))
+        const sort = sortList.find(obj => obj.value === params.sortValue)
+        // dispatch(
+        //     setFilters({
+        //         ...params,
+        //     sort})
+        // )
     }
-]
-const [sortValue, setSortValue] = React.useState(sortList[0].value)
+})
 
 React.useEffect(() => {
     const category = isActive > 0 ? `category=${isActive}` : ''
@@ -73,18 +66,26 @@ React.useEffect(() => {
     const order = !sortValue.includes('-') ? 'order=asc' : 'order=desc'
 
     setIsLoading(true)
-    fetch(`https://6319e5bb8e51a64d2befd040.mockapi.io/pizzaItems?${category}&sortBy=${sortBy}&${order}`)
-        .then((res) => res.json())
-        .then((arr) => {
-        setItems(arr)
+    axios.get(`https://6319e5bb8e51a64d2befd040.mockapi.io/pizzaItems?${category}&sortBy=${sortBy}&${order}`)
+        .then((res) => {
+        setItems(res.data)
         setIsLoading(false)
     })
-}, [isActive, sortValue]);
+}, [isActive, sortValue, searchInput]);
+
+React.useEffect(() => {
+    const queryString = qs.stringify({
+        isActive,
+        sortValue
+    })
+
+    navigate(`?${queryString}`)
+}, [isActive, sortValue, searchInput])
     return (
         <>
-            <Categories sortList={sortList} categories={categories} isActive={isActive} setIsActive={setIsActive} setSortValue={setSortValue}  />
+            <Categories sortList={sortList} categories={categories} isActive={isActive} setIsActive={setIsActive} />
             {isLoading && fakeArr.map((_, i) => <Skeleton key={i} />)}
-            <Pizzas searchInput={searchInput} categories={categories} isActive={isActive} items={items}/>
+            <Pizzas categories={categories} isActive={isActive} items={items}/>
         </>
     );
 }

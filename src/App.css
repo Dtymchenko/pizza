@@ -1,5 +1,5 @@
 .App {
-  width: 1200px;
+  max-width: 1200px;
   text-align: center;
   margin: 30px auto;
   border-radius: 5px;

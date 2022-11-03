@@ -49,3 +49,31 @@
         padding: 0;
     }
 }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+@media (min-width: 768px) and (max-width: 881px) {
+    
+}
+
+@media (min-width: 882px) and (max-width: 991px) {
+    
+}
+
+@media (max-width: 767px) {
+    
+}
+
+@media (max-width: 480px) {
+    .categories_list {
+        flex-wrap: wrap;
+        & li {
+            margin-bottom: 10px;
+        }
+    }
+    .popup {
+        width: 100px;
+    }
+}

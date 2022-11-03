@@ -1,11 +1,12 @@
 import React from 'react'
 import './Pizzas.scss';
 import Categories from './Categories';
+import { SearchContext } from './../App';
 
 
 
-export default function Pizzas({ items, isActive, categories, searchInput }) {
-    
+export default function Pizzas({ items, isActive, categories  }) {
+    const { searchInput } = React.useContext(SearchContext)
     const typeNames = ['thin', 'traditional']
     const [typeSelected, setTypeSelected] = React.useState(0)
     const [sizeSelected, setSizeSelected] = React.useState(0)
