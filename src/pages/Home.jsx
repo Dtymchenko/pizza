@@ -58,7 +58,7 @@ React.useEffect(() => {
         //     sort})
         // )
     }
-})
+},[isActive, sortValue, searchInput])
 
 React.useEffect(() => {
     const category = isActive > 0 ? `category=${isActive}` : ''

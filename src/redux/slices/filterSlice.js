@@ -45,13 +45,14 @@ export const filterSlice = createSlice({
       state.categoryId = action.payload;
     },
     setSort(state, action) {
-      console.log(action.payload);
       state.sort = sortList[action.payload];
     },
     setFilters(state, action) {
       console.log(action.payload);
       state.categoryId = action.payload.isActive;
       state.sort = sortList[action.payload.sort.id];
+      console.log(sortList[action.payload.sort.id]);
+      console.log(action.payload.sort.id);
     },
   },
 });
